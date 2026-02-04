@@ -1,0 +1,4 @@
+1)cd "C:\Users\lisni\OneDrive\Рабочий стол\3 сем\КЛ\TextStageProcessor-master\TextStageProcessor-master"
+2)venv38\Scripts\activate
+3)python stage_text_processor.py
+4)deactivate
