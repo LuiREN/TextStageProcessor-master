@@ -43,7 +43,11 @@ if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
 # Получаем экземпляр анализатора (10-20мб)
-morph = pymorphy2.MorphAnalyzer()
+try:
+    morph = pymorphy2.MorphAnalyzer()
+except Exception:
+    import pymorphy3
+    morph = pymorphy3.MorphAnalyzer()
 
 # Класс главного окна
 class MainWindow(QMainWindow):

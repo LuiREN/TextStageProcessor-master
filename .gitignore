@@ -1,8 +1,17 @@
 *.pyc
+__pycache__/
 *.csv
-venv
+venv/
+venv38/
 .vs/*
 .vscode/*
 .idea/*
 /output_files/Word2Vec
 /output_files/FastText
+/output_files/*.txt
+/input_files/
+
+# PyInstaller build artifacts
+/build/
+/dist/
+*.manifest
