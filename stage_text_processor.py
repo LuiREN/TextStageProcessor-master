@@ -1,11 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import os
+import sys
+
 from matplotlib import rc
+
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout
 
 from sources.TextClassificationLib import DialogClassificationLib
 from sources.bert.DialogBertClassifier import DialogBertClassifier
 from sources.utils import *
+
+try:
+    import pymorphy2
+except (ImportError, AttributeError):
+    import pymorphy3 as pymorphy2
 
 # Для корректного отображение шрифтов на графиках в Windows
 if (os.name != 'posix'):

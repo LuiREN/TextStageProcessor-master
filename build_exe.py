@@ -96,6 +96,7 @@ def build():
         'PyQt5.sip',
         'sources',
         'sources.utils',
+        'sources.TextPreprocessing',
         'sources.TextClasterization',
         'sources.TextClastering',
         'sources.TextClassification',
@@ -110,16 +111,30 @@ def build():
         'sources.FastText.DialogFastTextMaker',
         'sources.bert',
         'sources.bert.DialogBertClassifier',
+        # BERT / Transformers
+        'torch',
+        'torch.nn',
+        'torch.optim',
+        'torch.utils',
+        'torch.utils.data',
+        'transformers',
+        'transformers.models',
+        'transformers.models.bert',
+        'transformers.models.auto',
+        'safetensors',
+        'huggingface_hub',
+        'tokenizers',
     ]
 
     for imp in hidden_imports:
         args.append(f'--hidden-import={imp}')
 
-    # Исключаем тяжёлые библиотеки (torch ~2GB, transformers ~500MB)
-    # BERT функциональность потребует отдельной установки
+    # Собираем все данные transformers
+    args.append('--collect-data=transformers')
+    args.append('--collect-data=safetensors')
+
+    # Исключаем ненужные библиотеки
     excludes = [
-        'torch',
-        'transformers',
         'torchaudio',
         'torchvision',
         'tensorflow',
@@ -130,6 +145,20 @@ def build():
         'pytest',
         'sphinx',
         'docutils',
+        # Исключаем CUDA компоненты для уменьшения размера (CPU версия будет работать)
+        'nvidia',
+        'nvidia_cublas_cu12',
+        'nvidia_cuda_cupti_cu12',
+        'nvidia_cuda_nvrtc_cu12',
+        'nvidia_cuda_runtime_cu12',
+        'nvidia_cudnn_cu12',
+        'nvidia_cufft_cu12',
+        'nvidia_curand_cu12',
+        'nvidia_cusolver_cu12',
+        'nvidia_cusparse_cu12',
+        'nvidia_nccl_cu12',
+        'nvidia_nvjitlink_cu12',
+        'triton',
     ]
 
     for exc in excludes:
